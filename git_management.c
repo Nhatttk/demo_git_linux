@@ -12,6 +12,9 @@ int main() {
     int choice;
     char url[1000], message[1000];
 
+    // Token for authentication
+    const char *token = "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";
+
     do {
         print_menu();
         printf("Nhập lựa chọn của bạn: ");
@@ -21,8 +24,11 @@ int main() {
             case 1:
                 printf("Nhập URL của kho: ");
                 scanf("%s", url);
-                char clone_command[1200];  // Tăng kích thước buffer
-                snprintf(clone_command, sizeof(clone_command), "git clone %s", url);
+
+                // Add token to the URL for git clone
+                char clone_command[1500];  // Increased buffer size
+                snprintf(clone_command, sizeof(clone_command), "git clone %s%s", url, token);
+
                 if (system(clone_command) != 0) {
                     printf("Lỗi khi thực hiện git clone.\n");
                 }
@@ -31,8 +37,11 @@ int main() {
             case 2:
                 printf("Nhập thông điệp commit: ");
                 scanf(" %[^\n]s", message);
-                char push_command[1200];  // Tăng kích thước buffer
+
+                // Add token to the URL for git push
+                char push_command[1500];  // Increased buffer size
                 snprintf(push_command, sizeof(push_command), "git add . && git commit -m \"%s\" && git push", message);
+
                 if (system(push_command) != 0) {
                     printf("Lỗi khi thực hiện git push.\n");
                 }
