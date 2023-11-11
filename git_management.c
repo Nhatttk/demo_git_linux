@@ -40,7 +40,7 @@ int main() {
 
                 // Add token to the URL for git push
                 char push_command[1500];  // Increased buffer size
-                snprintf(push_command, sizeof(push_command), "git add . && git commit -m \"%s\" && git push", message);
+                snprintf(push_command, sizeof(push_command), "git add . && git commit -m \"%s\" && git push origin main", message);
 
                 if (system(push_command) != 0) {
                     printf("Lỗi khi thực hiện git push.\n");
